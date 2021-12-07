@@ -9,7 +9,6 @@ class Login extends React.Component {
     login = (e) => {
         e.preventDefault();
         this.props.login(this.state);
-        this.props.checkUser(this.state)
     };
     render() {
         return (

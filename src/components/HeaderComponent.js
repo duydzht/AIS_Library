@@ -52,7 +52,7 @@ const Header = (props) => {
                                 to='/basket'
                             >
                                 <i
-                                    class='fa fa-shopping-cart'
+                                    className='fa fa-shopping-cart'
                                     aria-hidden='true'
                                 ></i>
                                 {props.countCartItems ? (

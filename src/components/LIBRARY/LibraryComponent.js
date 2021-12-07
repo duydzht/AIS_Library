@@ -27,7 +27,9 @@ function LibItem(props) {
                         <li>{product.description}</li>
                     </ul>
                 </Link>
-                <button onClick={() => onAdd(product)} className='btn__signup'>Add To Cart</button>
+                <button onClick={() => onAdd(product)} className='btn__signup'>
+                    Add To Basket
+                </button>
             </div>
         </div>
     );
@@ -51,17 +53,20 @@ const Library = (props) => {
     return (
         <>
             <div className='row'>
-                <Link to='/add' className='link__react '>
-                    <button className='btn_primary mt-3 ml-3'>
-                        Add New Book
-                    </button>
-                </Link>
+                {localStorage.getItem('admin') ? (
+                    <Link to='/add' className='link__react '>
+                        <button className='btn_primary mt-3 ml-3'>
+                            Add New Book
+                        </button>
+                    </Link>
+                ) : (
+                    ''
+                )}
                 <Link to='/basket' className='link__react '>
                     <button className='btn_primary mt-3 ml-3'>
                         Go to Cart
                     </button>
                 </Link>
-
 
                 {/* formsearch */}
                 <form className='form__group'>

@@ -40,8 +40,8 @@ class AddBook extends React.Component {
                 <div className='wrapper'>
                     <div className='blog_post_signup'>
                         <h2>Create New Book</h2>
-                        <form action='/library' onSubmit={this.add}  className='form__group'>
-                            <div class='row'>
+                        <form onSubmit={this.add}  className='form__group'>
+                            <div className='row'>
                                 <div className='col-10 col-md-6'>
                                     <div>
                                         <label className=''>Link Image:</label>

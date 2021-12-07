@@ -62,7 +62,7 @@ class UpdateBook extends React.Component {
                             onSubmit={this.update}
                             className='form__group'
                         >
-                            <div class='row'>
+                            <div className='row'>
                                 <div className='col-10 col-md-6'>
                                     <div>
                                         <label className=''>Link Image:</label>

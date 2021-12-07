@@ -26,7 +26,7 @@ function RenderStaff(props) {
                         <h4>Category: {props.book.category}</h4>
                         <p>{props.book.description}</p>
                     </div>
-                    <Link
+                    {localStorage.getItem('admin') ? <Link
                         className='btn_primary'
                         to={{
                             pathname: `/edit`,
@@ -34,13 +34,14 @@ function RenderStaff(props) {
                         }}
                     >
                         EDIT
-                    </Link>
-                    <button
+                    </Link>: ('') }
+                    {localStorage.getItem('admin') ? <button
                         className='btn_primary ml-2'
                         onClick={() => props.deleteBook(props.book.id)}
                     >
                         DELETE
-                    </button>
+                    </button> : ('')}
+                    
                 </div>
             </div>
         </div>

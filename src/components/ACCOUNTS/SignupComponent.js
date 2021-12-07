@@ -1,57 +1,85 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class Signup extends React.Component {
+    state = {
+        username: '',
+        password: '',
+        enabled: true,
+        status: 'OK',
+        accountNonExpired: true,
+        accountNonLocked: true,
+        credentialsNonExpired: true,
+        authorities: 'mem',
+    };
+    addAcc = (e) => {
+        e.preventDefault();
+        if (this.state.username === '' || this.state.password === '') {
+            alert('ALl the fields are mandatory!');
+            return;
+        }
+        this.props.addAccount(this.state);
+        this.setState({
+            username: '',
+            password: '',
+        });
+    };
     render() {
         return (
             <div className='text-center'>
                 <div className='wrapper'>
                     <div className='blog_post_signup'>
                         <h1>Register Form</h1>
-                        <form action='#' method='post' className='form__group'>
+                        <form onSubmit={this.addAcc} className='form__group'>
                             <div className=''>
+                                <div>User Name</div>
                                 <input
                                     className='form__control mt-2'
                                     placeholder='User Name'
                                     type='text'
                                     required
+                                    value={this.state.username}
+                                    onChange={(e) =>
+                                        this.setState({
+                                            username: e.target.value,
+                                        })
+                                    }
                                 />
                             </div>
                             <div className=''>
-                                <input
-                                    className='form__control mt-2'
-                                    placeholder='Email'
-                                    type='email'
-                                    required
-                                />
-                            </div>
-                            <div className=''>
+                                <div>Password</div>
                                 <input
                                     className='form__control mt-2'
                                     placeholder='Password'
                                     type='password'
                                     required
+                                    value={this.state.password}
+                                    onChange={(e) =>
+                                        this.setState({
+                                            password: e.target.value,
+                                        })
+                                    }
                                 />
                             </div>
                             <div className=''>
+                                <div>Confirm Password</div>
                                 <input
                                     className='form__control mt-2'
                                     placeholder='Confirm Password'
                                     type='password'
-                                    required
                                 />
                             </div>
                             <div className=''>
-                                <input type='checkbox' name='checkbox' className='m-2' />I
-                                Accept Terms & Conditions
-                            </div>
-                            <Link to='/library'>
                                 <input
-                                    className='btn__signup'
-                                    type='submit'
-                                    value='REGISTER'
+                                    type='checkbox'
+                                    name='checkbox'
+                                    className='m-2'
                                 />
-                            </Link>
+                                I Accept Terms & Conditions
+                            </div>
+                            <button className='btn__signup' type='submit'>
+                                {' '}
+                                Register
+                            </button>
                         </form>
                     </div>
                 </div>
