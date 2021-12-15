@@ -31,8 +31,6 @@ class AddBook extends React.Component {
             pageNumber: '',
             quantity: '',
         });
-        alert('Thêm Thành công!');
-        this.props.history.push('/library');
     };
     render() {
         return (
@@ -110,11 +108,12 @@ class AddBook extends React.Component {
                                     <div>
                                         <label className=''>Status:</label>
                                         <input
+                                            disabled
                                             className='form__control'
                                             type='text'
                                             name='bookStatus'
                                             placeholder='bookStatus'
-                                            value={this.state.bookStatus}
+                                            value="ACTIVE"
                                             onChange={(e) =>
                                                 this.setState({
                                                     bookStatus: e.target.value,

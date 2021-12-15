@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const RenderCardItem = (props) => {
-    const { book, onAdd, onRemove } = props;
+    const { book, onRemove } = props;
 
     return (
         <div className='d-flex justify-content-center row'>
@@ -30,20 +30,10 @@ const RenderCardItem = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className='d-flex flex-row align-items-center qty'>
-                        <i
-                            className='fa fa-minus text-danger'
-                            onClick={() => onRemove(book)}
-                        />
-                        <h5 className='text-grey mt-1 mr-1 ml-1'>{book.qty}</h5>
-                        <i
-                            className='fa fa-plus text-success'
-                            onClick={() => onAdd(book)}
-                        />
-                    </div>
-
                     <div className='d-flex align-items-center'>
-                        <i className='fa fa-trash mb-1 text-danger' />
+                        <button className='btn' onClick={() => onRemove(book)}>
+                            <i className='fa fa-trash mb-1 text-danger'></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -52,8 +42,10 @@ const RenderCardItem = (props) => {
 };
 
 function Basket(props) {
-    const { cartItems, onAdd, onRemove } = props;
-
+    const { cartItems, onAdd, onRemove, regisBook } = props;
+    // for(let i=0; i<cartItems.length; i++) {
+    //     console.log(cartItems[i].id);
+    // }
     return (
         <div className=''>
             <div className='mt-2'>
@@ -81,32 +73,15 @@ function Basket(props) {
 
             {cartItems.length !== 0 && (
                 <>
-                    <div className='text-center'>
-                        <div className='mt-4 mb-4'>
-                            <div className='d-flex col-md-7 m-auto p-2 bg-white rounded'>
-                                <input
-                                    type='text'
-                                    className='form-control border-0 gift-card'
-                                    placeholder='discount code/gift card'
-                                />
-                                <button
-                                    className='btn btn-outline-warning btn-sm ml-2'
-                                    type='button'
-                                >
-                                    Apply
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='text-center mb-5'>
+                    <div className='text-center mb-5 mt-5'>
                         <button
                             className='btn__signup'
                             type='button'
-                            onClick={() =>
-                                alert('The request was successfully sent..!')
-                            }
+                            onClick={() =>{
+                                regisBook();
+                            }}
                         >
-                            Register Borrow
+                            Register All
                         </button>
                     </div>
                 </>

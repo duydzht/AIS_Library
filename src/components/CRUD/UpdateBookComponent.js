@@ -48,7 +48,6 @@ class UpdateBook extends React.Component {
             pageNumber: '',
             quantity: '',
         });
-        alert('Sửa thành công!');
         this.props.history.push('/library');
     };
     render() {

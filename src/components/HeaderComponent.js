@@ -3,11 +3,11 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 const Header = (props) => {
     const history = useHistory();
-    const logout =() => {
-        localStorage.removeItem("accessAcc");
-        localStorage.getItem("admin") ? localStorage.removeItem("admin") : localStorage.removeItem("mem");
-        history.replace('/login')
-    }
+    const logout = () => {
+        // localStorage.removeItem("accessAcc");
+        // localStorage.getItem("admin") ? localStorage.removeItem("admin") : localStorage.removeItem("mem");
+        // history.replace('/login')
+    };
     return (
         <React.Fragment>
             <nav className='sticky-top'>
@@ -34,16 +34,19 @@ const Header = (props) => {
                                 Library
                             </NavLink>
                         </li>
-
                         <li>
-                            <NavLink className='nav-link nav__link' to='/'>
+                            <NavLink className='nav-link nav__link' to='/admin'>
                                 <span className='fa fa-info-circle fa-lg'></span>{' '}
-                                About Us
+                                Administer
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink className='nav-link nav__link' to='/login'>
-                                <span onClick={logout} className='fa fa-sign-out fa-lg'></span>{' '}
+                            <NavLink
+                                className='nav-link nav__link'
+                                to='/student-list'
+                            >
+                                <span className='fa fa-graduation-cap fa-lg'></span>{' '}
+                                Student
                             </NavLink>
                         </li>
                         <li>
@@ -64,11 +67,19 @@ const Header = (props) => {
                                 )}
                             </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
+                            <NavLink className='nav-link nav__link' to='/login'>
+                                <span
+                                    onClick={logout}
+                                    className='fa fa-sign-out fa-lg'
+                                ></span>{' '}
+                            </NavLink>
+                        </li> */}
+                        {/* <li>
                             <NavLink className='nav-link nav__link' to='/information'>
                                 <span className='fa fa-user fa-lg'></span>{' '}
                             </NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </nav>

@@ -11,20 +11,6 @@ class Footer extends Component {
             <footer className='site-footer'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-sm-12 col-md-6'>
-                            <h6>About</h6>
-                        </div>
-                        <div className='col-xs-6 col-md-3'>
-                            <h6>Categories</h6>
-                        </div>
-                        <div className='col-xs-6 col-md-3'>
-                            <h6>Quick Links</h6>
-                        </div>
-                    </div>
-                    <hr />
-                </div>
-                <div className='container'>
-                    <div className='row'>
                         <div className='col-md-8 col-sm-6 col-xs-12'>
                             <p className='copyright-text'>
                                 Copyright © 2017 All Rights Reserved by Scanfcode.

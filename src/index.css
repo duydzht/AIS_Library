@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    background-image: url('https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     background-attachment: fixed;
     height: 600px;
     background-size: cover;
@@ -11,6 +11,7 @@ body {
     width: 100%;
     font-family: "Helvetica Neue", sans-serif;
     font-weight: lighter;
+    box-sizing: border-box;
 }
 
 code {
