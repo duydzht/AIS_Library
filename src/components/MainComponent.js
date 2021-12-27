@@ -14,7 +14,7 @@ import Library from './LIBRARY/LibraryComponent';
 import BookDetail from './LIBRARY/BookDetailComponent';
 import Basket from './LIBRARY/BasketComponent';
 import AddBook from './CRUD/AddBookComponent';
-import { apiLib, apiStu } from '../api/apiConnect';
+import { apiAcc, apiLib, apiStu } from '../api/apiConnect';
 import UpdateBook from './CRUD/UpdateBookComponent';
 import Account from './ACCOUNTS/AccountComponent';
 import Admin from './LIBRARY/AdminComponent';
@@ -22,6 +22,7 @@ import StudentList from './STUDENTS/StudentList';
 import InsertStudent from './STUDENTS/InsertStudent';
 import StudentDetail from './STUDENTS/StudentDetail';
 import UpdateStudent from './STUDENTS/UpdateStudent';
+import Error from './ErrorComponent';
 
 function Main() {
     // Library
@@ -49,46 +50,55 @@ function Main() {
     // }, []);
 
     // ==> Login
-    // const [users, setUsers] = useState([]);
-    // const loginHandler = (acc) => {
-    //     const accTrue = accounts.find(
-    //         (x) => x.username === acc.username && x.password === acc.password
-    //     );
-    //     if (accTrue) {
-    //         setUsers(accTrue);
-    //         alert('Login successful!');
-    //         history.replace('/library');
-    //         localStorage.setItem('accessAcc', true);
-    //         if (accTrue.authorities === 'admin') {
-    //             localStorage.setItem('admin', true);
-    //             return;
-    //         } else {
-    //             localStorage.setItem('mem', true);
-    //             return;
-    //         }
-    //     } else {
-    //         alert('Login failed! Please check your username or password');
-    //         return;
-    //     }
-    // };
+    const [isLoggedIn, setIsLoggedIn] = useState('');
+    const loginHandler = (acc) => {
+        apiAcc
+            .post(
+                `/accounts/login?username=${acc.username}&password=${acc.password}`
+            )
+            .then((res) => {
+                console.log(res.data);
+                setIsLoggedIn(true);
+            })
+            .catch((error) => {
+                console.log('ERRORS : ' + error);
+                history.push('/error');
+            });
+    };
 
     // ===> ADD ACCOUNT ----
 
-    // const addAccount = async (acc) => {
-    //     if (accounts.find((x) => x.username === acc.username)) {
-    //         alert('User đã tồn tại!');
-    //         history.replace('/signup');
-    //         return;
-    //     } else {
-    //         const request = {
-    //             id: acc.length + 1000,
-    //             ...acc,
-    //         };
-    //         const response = await api.post('/account', request);
-    //         setAccounts([...accounts, response.data]);
-    //         alert('Đăng kí thành công');
-    //         history.replace('/login');
-    //     }
+    const addAccount = (newAcc) => {
+        // const request = {
+        //     newAcc,
+        // };
+        console.log({
+            username: newAcc.username,
+            password: newAcc.password
+        });
+        apiAcc
+            .post('/accounts', {
+                username: newAcc.username,
+                password: newAcc.password
+            }, {
+                headers: {
+                    Authorization:
+                        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0YWNjIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwOTEvYWNjb3VudHMvbG9naW4iLCJleHAiOjE2NDA2MDQ5MzR9.JJRfUVbMwz-LE-GEa3tTula1M-5Djv9fTeQ91KG8JNU',
+                },
+            })
+            .then((response) => {
+                console.log('Success');
+            })
+            .catch((err) => {
+                console.log(err);
+                history.push('/error');
+            });
+    };
+
+    //==========> ACCOUNT DETAIL <==========
+    // const [account, setAccount] = useState([]);
+    // const accountDetail = () => {
+    //     apiAcc.get(`accounts/{id}`).then().catch(err => {});
     // };
 
     // =====> DELETE ACCOUNT-----
@@ -129,44 +139,65 @@ function Main() {
 
     //======================> ADD NEW BOOK <==========================//
 
-    const addBookHandler = async (book) => {
+    const addBookHandler = (book) => {
         const request = {
             ...book,
         };
-        const response = await apiLib.post('/int/book', request, {
-            headers: {
-                authorization: token,
-            },
-        });
-        alert(response.data);
-        setLibrary([...library, response.data]);
-        history.push('/library');
+        apiLib
+            .post('/int/book', request, {
+                headers: {
+                    authorization: token,
+                },
+            })
+            .then((res) => {
+                alert(res.data);
+                setLibrary([...library, book]);
+                history.push('/library');
+            })
+            .catch((err) => {
+                console.log(err);
+                history.push('/error');
+            });
     };
 
     // =====================> DeleteBook <==========================//
 
-    const deleteBookHandler = async (id) => {
-        await apiLib.delete(`/ext/book/${id}`, {
-            headers: {
-                authorization: token,
-            },
-        });
-        const newLibrary = library.filter((book) => {
-            return book.id !== id;
-        });
-        setLibrary(newLibrary);
-        history.push('/library');
+    const deleteBookHandler = (id) => {
+        apiLib
+            .delete(`/ext/book/${id}`, {
+                headers: {
+                    authorization: token,
+                },
+            })
+            .then(() => {
+                const newLibrary = library.filter((book) => {
+                    return book.id !== id;
+                });
+                setLibrary(newLibrary);
+                history.push('/library');
+            })
+            .catch((err) => {
+                console.log(err);
+                history.push('/error');
+            });
     };
 
     //====================> UPDATE BOOK <==========================//
 
-    const updateBookHandler = async (book) => {
-        const response = await apiLib.put(`/ext/book/`, book, {
-            headers: {
-                authorization: token,
-            },
-        });
-        alert(response.data);
+    const updateBookHandler = (book) => {
+        apiLib
+            .put(`/ext/book/`, book, {
+                headers: {
+                    authorization: token,
+                },
+            })
+            .then((res) => {
+                alert(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+                history.push('/error');
+            });
         // const {
         //     id,
         //     // image,
@@ -192,7 +223,7 @@ function Main() {
     const onAdd = (product) => {
         const exist = cartItems.find((x) => x.id === product.id);
         if (exist) {
-            alert('Bạn đã mượn cuốn sách này rồi');
+            alert('Sách đã có trong rỏ');
         } else {
             alert('Add to basket SUCCESSFUL');
             setCartItems([...cartItems, { ...product }]);
@@ -367,7 +398,6 @@ function Main() {
     //===============> INSERT NEW STUDENT<=================//
 
     const insertStudent = async (student) => {
-        console.log(student);
         const request = {
             ...student,
         };
@@ -418,32 +448,32 @@ function Main() {
             <Header countCartItems={cartItems.length} />
             <Switch>
                 {/* ==> ACCOUNT ROUTE */}
-                {/* <Route
-                        exact
-                        path='/login'
-                        render={(props) => (
-                            <Login {...props} login={loginHandler} />
-                        )}
-                    />
+                <Route
+                    exact
+                    path='/login'
+                    render={(props) => (
+                        <Login {...props} login={loginHandler} />
+                    )}
+                />
 
-                    <Route
-                        exact
-                        path='/signup'
-                        render={(props) => (
-                            <Signup {...props} addAccount={addAccount} />
-                        )}
-                    />
-                    <Route
-                        exact
-                        path='/information'
-                        render={(props) => (
-                            <Account
-                                {...props}
-                                users={users}
-                                deleteAccount={deleteAccount}
-                            />
-                        )}
-                    /> */}
+                <Route
+                    exact
+                    path='/signup'
+                    render={(props) => (
+                        <Signup {...props} addAccount={addAccount} />
+                    )}
+                />
+                {/* <Route
+                    exact
+                    path='/information'
+                    render={(props) => (
+                        <Account
+                            {...props}
+                            users={users}
+                            deleteAccount={deleteAccount}
+                        />
+                    )}
+                /> */}
 
                 {/* ==> LIBRARY ROUTE */}
                 <Route exact path='/library/:id' component={BookWithId} />
@@ -453,13 +483,10 @@ function Main() {
                     render={(props) => (
                         <Library
                             {...props}
-                            //library={searchResult}
                             searchName={searchName}
                             library={
                                 searchResult.length < 1 ? library : searchResult
                             }
-                            // term={searchTerm}
-                            // searchHandler={searchHandler}
                             onAdd={onAdd}
                             borrowed={borrowed}
                             registered={registered}
@@ -509,7 +536,6 @@ function Main() {
                         />
                     )}
                 />
-
                 {/* =====>STUDENT ROUTE<===== */}
                 <Route
                     exact
@@ -544,7 +570,8 @@ function Main() {
                     path='/student-list/:id'
                     component={StudentWithId}
                 />
-                <Redirect to='/library' />
+                <Route exact path='/error' component={Error} />
+                <Redirect to='/login' />
             </Switch>
             <Footer />
         </div>

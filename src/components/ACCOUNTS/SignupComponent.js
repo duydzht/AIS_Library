@@ -4,24 +4,28 @@ class Signup extends React.Component {
     state = {
         username: '',
         password: '',
-        enabled: true,
-        status: 'OK',
-        accountNonExpired: true,
-        accountNonLocked: true,
-        credentialsNonExpired: true,
-        authorities: 'mem',
+        // confirmPassword: '',
+        // enabled: true,
+        // accountNonExpired: true,
+        // accountNonLocked: true,
+        // credentialsNonExpired: true,
     };
     addAcc = (e) => {
         e.preventDefault();
-        if (this.state.username === '' || this.state.password === '') {
-            alert('ALl the fields are mandatory!');
+        if (this.state.password.length < 6) {
+            alert('This password must be at 6 characters or than!');
             return;
+        } else if (this.state.username.length > 12 || this.state.username.length < 6) {
+            alert('This Username must be at 6 - 12 characters ');
+            return;
+        } else {
+            this.props.addAccount(this.state);
         }
-        this.props.addAccount(this.state);
-        this.setState({
-            username: '',
-            password: '',
-        });
+
+        // this.setState({
+        //     username: '',
+        //     password: '',
+        // });
     };
     render() {
         return (
@@ -66,6 +70,12 @@ class Signup extends React.Component {
                                     className='form__control mt-2'
                                     placeholder='Confirm Password'
                                     type='password'
+                                    value={this.state.confirmPassword}
+                                    onChange={(e) =>
+                                        this.setState({
+                                            confirmPassword: e.target.value,
+                                        })
+                                    }
                                 />
                             </div>
                             <div className=''>

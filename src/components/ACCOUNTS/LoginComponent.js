@@ -15,7 +15,14 @@ class Login extends React.Component {
             <div className='text-center'>
                 <div className='wrapper'>
                     <div className='blog_post_signup'>
-                        <h1>Login here</h1>
+                    <img
+                        className='btMainLogo'
+                        data-hw='4.5277777777778'
+                        src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K'
+                        alt='AISolutions'
+                        width="50px"
+                    /> {' '}
+                    <span className="logo__login">React-app</span>
                         <form  className='form__group' onSubmit={this.login}>
                             <input
                                 className='form__control mt-2'
@@ -23,7 +30,7 @@ class Login extends React.Component {
                                 name='username'
                                 value={this.state.username}
                                 placeholder='USER NAME'
-                                required=''
+                                required
                                 onChange={(e) =>
                                     this.setState({
                                         username: e.target.value,
@@ -36,7 +43,7 @@ class Login extends React.Component {
                                 name='password'
                                 value={this.state.password}
                                 placeholder='PASSWORD'
-                                required=''
+                                required
                                 onChange={(e) =>
                                     this.setState({
                                         password: e.target.value,

@@ -13,7 +13,6 @@ const StudentDetail = (props) => {
                 authorization: props.token,
             },
         });
-        console.log(response.data);
         return response.data;
     };
     useEffect(() => {
@@ -32,7 +31,6 @@ const StudentDetail = (props) => {
                 authorization: props.token,
             },
         });
-        console.log(response.data);
         return response.data;
     };
     useEffect(() => {
@@ -119,15 +117,27 @@ const StudentDetail = (props) => {
                             
                         </button> */}
                             <h4>Book Borrowed</h4>
-                            {bookBorrowedWithUser}
-                            <hr />
-                            <div className='check_graduate'>
-                                <i
-                                    className='fa fa-exclamation-circle text-danger'
-                                    aria-hidden='true'
-                                ></i>
-                                <h3>{checkGraduate}</h3>
+                            <div className='text-info'>
+                                {bookBorrowedWithUser}
                             </div>
+                            <hr />
+                            {checkGraduate == false ? (
+                                <div className='check_graduate-false'>
+                                    <i
+                                        className='fa fa-exclamation-circle text-danger'
+                                        aria-hidden='true'
+                                    ></i>
+                                    <h3>This Student can't Graduate</h3>
+                                </div>
+                            ) : (
+                                <div className='check_graduate-true'>
+                                    <i
+                                        className='fa fa-check-circle text-success'
+                                        aria-hidden='true'
+                                    ></i>
+                                    <h3>Can Graduate</h3>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

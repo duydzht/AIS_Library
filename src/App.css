@@ -24,6 +24,15 @@
     color: #61dafb;
 }
 
+.pagination {
+    height: 100vh;
+}
+
+.logo__login {
+    font-size: 30px;
+    color: #61dafb;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -31,28 +40,6 @@
     to {
         transform: rotate(360deg);
     }
-}
-
-
-/* navbar */
-
-.nav__link {
-    color: #f19b38 !important;
-    font-weight: bold !important;
-}
-
-.nav__link:hover {
-    color: #ff9431 !important;
-    transition: 0.7s all !important;
-    -webkit-transition: 0.7s all !important;
-}
-
-button.badge {
-    background-color: #f04040;
-    border: none;
-    color: #ffffff;
-    width: 1rem;
-    border-radius: 0.5rem;
 }
 
 
@@ -99,6 +86,29 @@ button.badge {
     background-size: cover;
 } */
 
+.nav__link {
+    color: #f19b38;
+    font-weight: bold;
+}
+
+.nav__link:hover {
+    color: #48491f;
+    transition: 0.7s all;
+    -webkit-transition: 0.7s all;
+}
+
+.active_link {
+    color: #48491f !important;
+}
+
+button.badge {
+    background-color: #f04040;
+    border: none;
+    color: #ffffff;
+    width: 1rem;
+    border-radius: 0.5rem;
+}
+
 .content {
     width: 94%;
     margin: 4em auto;
@@ -111,10 +121,9 @@ button.badge {
     line-height: 40px;
     float: left;
     margin: 10px 46px;
-    color: #fff;
-    font-weight: bold;
-    font-size: 20px;
     letter-spacing: 2px;
+    font-size: 30px;
+    color: #61dafb;
 }
 
 nav {
@@ -123,7 +132,7 @@ nav {
 }
 
 nav ul {
-    line-height: 20px;
+    line-height: 30px;
     list-style: none;
     background: rgba(0, 0, 0, 0);
     overflow: hidden;
@@ -192,6 +201,43 @@ nav ul li a {
 }
 
 
+/* LIBRARY */
+
+
+/* Dropdown Menu */
+
+.select__sort {
+    padding: 10px;
+    border: 2px solid rgb(206, 128, 12);
+    color: rgb(206, 128, 12);
+    font-weight: bold;
+}
+
+.select__sort:hover {
+    background: rgba(9, 68, 58, 0.678);
+    color: #fff;
+    border: 2px solid rgb(255, 255, 255);
+    transition: 0.5s all;
+    -webkit-transition: 0.7s all;
+}
+
+.dropdown__menu {
+    background: rgba(28, 109, 95, 0.26) !important;
+    transition: 0.5s all !important;
+    -webkit-transition: 0.9s all !important;
+}
+
+.dropdown-item {
+    margin: 5px 0 5px 0 !important;
+}
+
+.dropdown-item:hover {
+    background: rgb(10, 107, 62)!important;
+    transition: 0.5s all !important;
+    -webkit-transition: 0.7s all !important;
+}
+
+
 /* !card */
 
 * {
@@ -199,7 +245,8 @@ nav ul li a {
     padding: 0;
 }
 
-section::before {
+
+/* section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -219,7 +266,7 @@ section::after {
     height: 100%;
     background: linear-gradient(#E55D87, #5FC3E4);
     clip-path: circle(20% at 10% 10%);
-}
+} */
 
 .containers {
     position: relative;
@@ -263,6 +310,7 @@ section::after {
     width: 150px;
     height: 150px;
     overflow: hidden;
+    border-radius: 25px;
 }
 
 .containers .card .content .imgBx img {
@@ -751,12 +799,12 @@ section::after {
 
 .searchBox {
     position: absolute;
-    top: 10%;
-    left: 70%;
+    top: 8%;
+    left: 60%;
     transform: translate(-50%, 50%);
-    background: #fdad0023;
+    background: #fdad00a9;
     height: 40px;
-    border: 3px solid #cd8c1c;
+    /* border: 3px solid #cd8c1c; */
     border-radius: 40px;
     padding: 0px;
 }
@@ -764,6 +812,8 @@ section::after {
 .searchBox:hover>.searchInput {
     width: 240px;
     padding: 0 6px;
+    transition: 0.5s all;
+    -webkit-transition: 1s all;
 }
 
 .searchBox:hover>.searchButton {
@@ -777,7 +827,7 @@ section::after {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #9e5400;
+    background: #f59930;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -790,10 +840,11 @@ section::after {
     outline: none;
     float: left;
     padding: 0px;
-    color: rgb(150, 76, 7);
+    color: rgb(255, 255, 255);
     font-size: 16px;
+    font-weight: bold;
     transition: 0.4s;
-    line-height: 40px;
+    line-height: 38px;
     width: 0px;
 }
 
@@ -827,10 +878,8 @@ section::after {
 }
 
 .btn__table {
-    width: 25px;
-    height: 25px;
+    padding: 10px;
     background: none;
-    border-radius: 25px;
 }
 
 .btn__table:hover {
@@ -840,6 +889,27 @@ section::after {
     -webkit-transition: 0.5s all;
 }
 
-.check_graduate {
+.check_graduate-false {
     border: 1px solid rgb(255, 0, 0);
+}
+
+.check_graduate-true {
+    border: 1px solid rgb(18, 173, 31);
+}
+
+.text-center {
+    margin-top: 100px;
+}
+
+.page__error {
+    height: 100vh;
+}
+
+.card__error {
+    width: 700px;
+    margin: auto;
+    background: rgba(253, 238, 187, 0.555);
+    padding: 20px;
+    border: 2px solid rgb(18, 161, 25);
+    border-radius: 15px;
 }

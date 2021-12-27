@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import SkeletonCard from '../../skeleton/SkeletonCard';
+//import SkeletonCard from '../../skeleton/SkeletonCard';
 import { Link } from 'react-router-dom';
-import {apiLib} from '../../api/apiConnect';
+//import { apiLib } from '../../api/apiConnect';
 import { Control, LocalForm } from 'react-redux-form';
 
 function LibItem(props) {
@@ -31,7 +31,7 @@ function LibItem(props) {
             return (
                 <button
                     onClick={() => onAdd(props.book)}
-                    className='btn__signup mb-3'
+                    className='btn__signup'
                 >
                     <i className='fa fa-plus' aria-hidden='true'></i>
                     <i className='fa fa-shopping-cart' aria-hidden='true'></i>
@@ -42,32 +42,27 @@ function LibItem(props) {
     return (
         <div className=''>
             <div className='containers'>
-                <Link className='card link__react' to={`/library/${book.id}`}>
-                    <div className='content'>
+                <div className='card '>
+                    <Link
+                        className='content link__react'
+                        to={`/library/${book.id}`}
+                    >
                         <div className='imgBx'>
                             <img src={book.image} alt='' />
                         </div>
                         <div className='contentBx'>
                             <h3>
                                 {book.name}
-                                {/* {localStorage.getItem(book.id+'rg') ? (
-                                    <i
-                                        className='fa fa-check text-success'
-                                        aria-hidden='true'
-                                    ></i>
-                                ) : (
-                                    ''
-                                )} */}
                                 <br />
                                 <span>{book.author}</span>
                             </h3>
                         </div>
-                    </div>
+                    </Link>
                     <ul className='sci'>
-                        <li>{book.description}</li>
+                        {/* <li>{book.description}</li> */}
+                        <li>{renderButtons()}</li>
                     </ul>
-                </Link>
-                {renderButtons()}
+                </div>
             </div>
         </div>
     );
@@ -96,10 +91,7 @@ const Library = (props) => {
     const renderLibrary = library.map((book) => {
         if (book.bookStatus === 'ACTIVE') {
             return (
-                <section
-                    className='col-12 col-md-4 col-lg-3 mt-3'
-                    key={book.id}
-                >
+                <div className='col-12 col-md-4 col-lg-3 mt-3' key={book.id}>
                     <LibItem
                         key={book.id}
                         book={book}
@@ -107,7 +99,7 @@ const Library = (props) => {
                         borrowed={borrowed}
                         registered={registered}
                     />
-                </section>
+                </div>
             );
         } else return '';
     });
@@ -115,6 +107,14 @@ const Library = (props) => {
     return (
         <>
             <div className='row'>
+                <div className='form-group mt-3'>
+                    <select className='select__sort'>
+                        <option value=''>Sort by</option>
+                        <option value='Male'>Name</option>
+                        <option value='Female'>Publish Date</option>
+                        <option value='Different'>Category</option>
+                    </select>
+                </div>
                 <Link to='/add' className='link__react '>
                     <button className='btn__add mt-3 ml-3'>
                         <i className='fa fa-plus' aria-hidden='true'></i>
@@ -124,7 +124,7 @@ const Library = (props) => {
 
                 <Link to='/basket' className='link__react '>
                     <button className='btn_primary mt-3 ml-3'>
-                        Selected books
+                        <i className='fa fa-shopping-cart'></i>
                     </button>
                 </Link>
 
